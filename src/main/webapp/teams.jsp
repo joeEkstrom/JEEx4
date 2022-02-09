@@ -9,6 +9,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@include file="WEB-INF/jspf/declarativemethods.jspf" %>
+<%@taglib uri="WEB-INF/studentDropdown.tld" prefix="s" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -39,7 +40,10 @@
           
             <form method="post">
                <br /><br />  
-
+				<label>Student 1</label>
+				<s:studentdropdown name="dd1" className="select 1"/><br>
+				<label>Student 2</label>
+				<s:studentdropdown name="dd2" className="select 2"/><br>
                 <button class="btn btn-primary" name="btnSubmit">Create Team</button>
             </form>
            

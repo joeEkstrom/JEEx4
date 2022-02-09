@@ -4,7 +4,9 @@
 package edu.nbcc.student;
 
 import java.io.IOException;
+
 import java.util.*;
+import java.util.stream.Collectors;
 
 import jakarta.servlet.jsp.JspException;
 import jakarta.servlet.jsp.tagext.SimpleTagSupport;
@@ -13,7 +15,7 @@ import jakarta.servlet.jsp.tagext.SimpleTagSupport;
  * @author joeye
  *
  */
-public class Student extends SimpleTagSupport {
+public class Student {
 	private int id;
 	private String firstName;
 	private String lastName;
@@ -72,21 +74,27 @@ public class Student extends SimpleTagSupport {
 		this.lastName = lastName;
 	}
 	
-	public List<Student> getStudents() {
-		return new ArrayList<Student>();//remove after
+	public static List<Student> getStudents() {
+		List<Student> students = new ArrayList<Student>();
+		students.add(new Student(1, "Student 1", "Student 1"));
+		students.add(new Student(1, "Student 2", "Student 2"));
+		students.add(new Student(1, "Student 3", "Student 3"));
+		students.add(new Student(1, "Student 4", "Student 4"));
+		students.add(new Student(1, "Student 5", "Student 5"));
+		students.add(new Student(1, "Student 6", "Student 6"));
+		return students;
 	}
 	
 	public Student getStudent(int id){
-		return new Student(1, "Test", "Test");//remove after
+		List<Student> student =  getStudents().stream().filter(s -> s.getId() == id).collect(Collectors.toList());
+		if (student.size() > 0) {
+			return student.get(0);
+		}
+		return null;
 	}
 	
-	public boolean isStudentOnTeam() {
-		return true;//remove after
+	public static boolean isStudentOnTeam(List<Student> list, Student student) {
+		return list.stream().filter(s-> s.getId() == student.getId()).collect(Collectors.toList()).size() > 0;
 	}
 	
-	@Override
-	public void doTag() throws JspException, IOException {
-		// TODO Auto-generated method stub
-		super.doTag();
-	}
 }
